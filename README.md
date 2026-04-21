@@ -1,6 +1,6 @@
 # Nimadub - AI-Driven Development Operations Console
 
-내부용 AI 개발 운영 콘솔 MVP입니다. Slack/Notion/GitHub Projects를 대체하지 않고, AI 운영에 필요한 핵심 기능을 통합합니다.
+내부용 AI 개발 운영 콘솔 MVP입니다. Slack/Notion/GitHub Projects를 대체하여, AI 운영에 필요한 핵심 기능을 통합합니다.
 
 ## 주요 기능
 
