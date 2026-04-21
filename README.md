@@ -23,62 +23,7 @@
 - **UI**: Tailwind CSS (shadcn/ui 컴포넌트 구조)
 - **인증**: MVP 수준의 간단한 패스워드 기반
 
-**🎯 장점**: npm install → npx prisma migrate dev → npm run dev (3단계로 바로 실행 가능!)
-
-## 프로젝트 구조
-
-```
-nimadub/
-├── prisma/
-│   └── schema.prisma           # DB 스키마 정의
-├── src/
-│   ├── app/
-│   │   ├── api/                # RESTful API routes
-│   │   │   ├── projects/
-│   │   │   ├── tasks/
-│   │   │   ├── approvals/
-│   │   │   ├── documents/
-│   │   │   └── audit-logs/
-│   │   ├── (dashboard)/        # 인증된 영역
-│   │   │   ├── layout.tsx
-│   │   │   ├── projects/       # 프로젝트 목록, 보드
-│   │   │   ├── documents/
-│   │   │   ├── approvals/
-│   │   │   └── audit-logs/
-│   │   ├── globals.css
-│   │   └── layout.tsx
-│   ├── components/
-│   │   ├── sidebar.tsx
-│   │   ├── task-board.tsx
-│   │   └── task-card.tsx
-│   ├── lib/
-│   │   ├── prisma.ts           # Prisma 싱글톤
-│   │   ├── audit.ts            # 감사 로그 공통 함수
-│   │   └── auth.ts             # 인증 헬퍼
-│   └── types/
-│       └── index.ts            # 타입 + enum 정의
-├── tailwind.config.ts
-├── tsconfig.json
-├── next.config.mjs
-├── package.json
-└── README.md
-```
-
-## 데이터베이스 스키마
-
-주요 모델들:
-
-- **Project**: 프로젝트 관리
-- **Task**: 작업 (ProjectId 외래키)
-- **TaskMessage**: 메시지 스레드 (TaskId 외래키)
-- **Decision**: 의사결정 기록
-- **Document**: 문서 (ProjectId/TaskId 선택적)
-- **Approval**: 승인 요청
-- **MemorySnapshot**: 메모리 스냅샷 (type별 분류)
-- **GithubLink**: GitHub 이슈/PR 연결
-- **AuditLog**: 감사 로그 (CREATE, UPDATE, STATUS_CHANGE, DELETE)
-
-모든 모델은 `createdAt`, `updatedAt` 타임스탐프 포함.
+**장점**: npm install → npx prisma migrate dev → npm run dev (3단계로 바로 실행 가능)
 
 ## API 엔드포인트
 
@@ -125,7 +70,7 @@ nimadub/
 5. **/approvals** - PENDING 승인 목록
 6. **/audit-logs** - 전체 감사 로그 (entity 필터)
 
-## 로컬 실행 방법 (SQLite - 별도 설치 불필요!)
+## 로컬 실행 방법 (SQLite - 별도 설치 불필요)
 
 ### 1. 의존성 설치
 ```bash
@@ -157,17 +102,6 @@ npm start
 ```bash
 npx prisma studio
 # → http://localhost:5555
-```
-
-## 타입 정의
-
-모든 enum은 `src/types/index.ts`에서 문자열 상수로 정의:
-
-```typescript
-export const TASK_STATUS = { BACKLOG, READY, IN_PROGRESS, ... }
-export const APPROVAL_STATUS = { PENDING, APPROVED, REJECTED }
-export const MEMORY_TYPE = { CONSTITUTION, SPRINT, TASK, RESET_SUMMARY }
-export const DOCUMENT_TYPE = { CONSTITUTION, PRD, ADR, ... }
 ```
 
 ## 감사 로그 자동 기록
